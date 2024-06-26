@@ -1,6 +1,6 @@
 package com.challenge.forohub.model.tema;
 
-import com.challenge.forohub.model.respuesta.Repuesta;
+import com.challenge.forohub.model.respuesta.Respuesta;
 import com.challenge.forohub.model.usuario.Usuario;
 import com.challenge.forohub.model.curso.Curso;
 import jakarta.persistence.*;
@@ -26,13 +26,15 @@ public class Tema {
     private Long id;
     private String titulo;
     private String mensaje;
-    @ManyToOne
-    private Usuario autor;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "autor_id")
+    private Usuario autorId;
     private LocalDateTime fecha;
-    @ManyToOne
-    private Curso curso;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "curso_id")
+    private Curso cursoId;
     @Enumerated(EnumType.STRING)
     private Estado status;
-    @OneToMany(mappedBy = "tema", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-    private List<Repuesta> respuestas;
+    @OneToMany(mappedBy = "temaId", cascade = CascadeType.ALL, fetch = FetchType.LAZY) //momentaneamente
+    private List<Respuesta> respuestas;
 }

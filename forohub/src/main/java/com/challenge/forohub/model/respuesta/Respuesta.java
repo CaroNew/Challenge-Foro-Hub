@@ -14,14 +14,17 @@ import java.time.LocalDateTime;
 @Getter
 @NoArgsConstructor
 @AllArgsConstructor
-public class Repuesta {
+public class Respuesta {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String mensaje;
-    @ManyToOne
-    private Usuario autor;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "autor_id")
+    private Usuario autorId;
     private LocalDateTime fecha;
-    @ManyToOne
-    private Tema tema;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "tema_id")
+    private Tema temaId;
+    private boolean solucion;
 }
