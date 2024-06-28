@@ -13,4 +13,5 @@ public record DatosRegistroUsuario(
         @NotBlank
         String clave
 ) {
+
 }
