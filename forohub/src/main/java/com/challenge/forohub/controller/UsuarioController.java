@@ -33,11 +33,11 @@ public class UsuarioController {
 
 
     @PostMapping
-    @RequestMapping("/registro")
+    @RequestMapping
     public ResponseEntity<DatosRespuestaUsuario> create(@RequestBody @Valid DatosRegistroUsuario datos,
                                                         UriComponentsBuilder uriBuilder) {
+        //poner esto en un servicio?
         var passEncod = passwordEncoder.encode(datos.clave());
-        System.out.println(passEncod);
         datos = new DatosRegistroUsuario(datos.nombre(), datos.CorreoElectronico(), passEncod);
         Usuario usuario = usuarioRepository.save(new Usuario(datos));
         DatosRespuestaUsuario respuesta = new DatosRespuestaUsuario(usuario.getId(), usuario.getNombre(),
