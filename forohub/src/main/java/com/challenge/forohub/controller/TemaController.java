@@ -80,7 +80,7 @@ public class TemaController {
 
     @DeleteMapping("/{id}")
     @Transactional
-    public ResponseEntity delete(@PathVariable Long id) {
+    public ResponseEntity<Void> delete(@PathVariable Long id) {
         Tema tema = temaRepository.findById(id).get();
         tema.desactivarTema();
         return ResponseEntity.noContent().build();

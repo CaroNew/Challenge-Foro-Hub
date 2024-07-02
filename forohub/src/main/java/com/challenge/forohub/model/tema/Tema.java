@@ -39,7 +39,7 @@ public class Tema {
     private Estado status;
     @OneToMany(mappedBy = "temaId", cascade = CascadeType.ALL, fetch = FetchType.LAZY) //momentaneamente
     private List<Respuesta> respuestas;
-    private boolean activo;
+    private boolean activo=true;
 
     public Tema(Curso curso, Usuario usuario, DatosRegistroTema body) {
         this(null, body.titulo(), body.mensaje(), usuario, LocalDateTime.now(), curso, Estado.ABIERTO, null, true);
