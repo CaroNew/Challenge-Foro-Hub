@@ -1,14 +1,14 @@
 package com.challenge.forohub.controller;
 
-import com.challenge.forohub.dto.DatosLoginUsuario;
-import com.challenge.forohub.dto.DatosRegistroUsuario;
-import com.challenge.forohub.dto.DatosRespuestaRegistroUsuario;
-import com.challenge.forohub.dto.JWTtoken;
+import com.challenge.forohub.domain.dto.DatosLoginUsuario;
+import com.challenge.forohub.domain.dto.DatosRegistroUsuario;
+import com.challenge.forohub.domain.dto.DatosRespuestaRegistroUsuario;
+import com.challenge.forohub.domain.dto.JWTtoken;
 import com.challenge.forohub.infra.security.TokenService;
-import com.challenge.forohub.model.roles.Rol;
-import com.challenge.forohub.model.usuario.Usuario;
-import com.challenge.forohub.repository.RolRepository;
-import com.challenge.forohub.repository.UsuarioRepository;
+import com.challenge.forohub.domain.model.roles.Rol;
+import com.challenge.forohub.domain.model.usuario.Usuario;
+import com.challenge.forohub.domain.repository.RolRepository;
+import com.challenge.forohub.domain.repository.UsuarioRepository;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -22,7 +22,6 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.util.UriComponentsBuilder;
 
 import java.net.URI;
-import java.util.Collections;
 
 @RestController
 @RequestMapping("api/auth")

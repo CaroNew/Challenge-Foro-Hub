@@ -1,7 +1,6 @@
 package com.challenge.forohub.infra.security;
 
-import com.challenge.forohub.model.usuario.Usuario;
-import com.challenge.forohub.repository.UsuarioRepository;
+import com.challenge.forohub.domain.repository.UsuarioRepository;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;

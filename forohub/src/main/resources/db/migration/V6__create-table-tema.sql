@@ -6,6 +6,7 @@ create table tema (
     fecha TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     curso_id bigint not null,
     status ENUM('ABIERTO', 'CERRADO') NOT NULL DEFAULT 'ABIERTO',
+    activo tinyint not null default 1,
 
     primary key (id),
     foreign key (autor_id) references usuario(id),

@@ -1,12 +1,11 @@
 package com.challenge.forohub.controller;
 
-import com.challenge.forohub.dto.DatosModificarUsuario;
-import com.challenge.forohub.dto.DatosRespuestaRegistroUsuario;
-import com.challenge.forohub.dto.DatosCrearUsuario;
-import com.challenge.forohub.model.roles.Rol;
-import com.challenge.forohub.model.usuario.Usuario;
-import com.challenge.forohub.repository.RolRepository;
-import com.challenge.forohub.repository.UsuarioRepository;
+import com.challenge.forohub.domain.dto.DatosModificarUsuario;
+import com.challenge.forohub.domain.dto.DatosCrearUsuario;
+import com.challenge.forohub.domain.model.roles.Rol;
+import com.challenge.forohub.domain.model.usuario.Usuario;
+import com.challenge.forohub.domain.repository.RolRepository;
+import com.challenge.forohub.domain.repository.UsuarioRepository;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Pageable;
@@ -44,11 +43,7 @@ public class UsuarioController {
                                                                 UriComponentsBuilder uriBuilder) {
 
         var passEncod = passwordEncoder.encode(datos.clave());
-
-
         Rol rol = rolRepository.findByNombre(datos.rol());
-        System.out.println("devuelve el rol: " + rol.getNombre()
-        + "clase: " + rol.getClass().getSimpleName());
 
         datos = new DatosCrearUsuario(datos.nombre(), datos.CorreoElectronico(), passEncod, datos.rol());
 
@@ -66,7 +61,8 @@ public class UsuarioController {
     @GetMapping
     public ResponseEntity<Page<DatosRespuestaUsuario>> userList(@PageableDefault(size = 5,
             sort = {"nombre"}) Pageable page) {
-        Page<Usuario> usuarios = usuarioRepository.findAll(page);
+        //mostrar solo los usuarios activos
+        Page<Usuario> usuarios = usuarioRepository.findByActivoTrue(page);
 
         return ResponseEntity.ok(usuarios.map(usuario -> new DatosRespuestaUsuario(usuario.getId(),
                 usuario.getNombre(), usuario.getCorreoElectronico(), usuario.getRoles())));
@@ -74,6 +70,7 @@ public class UsuarioController {
 
     @GetMapping("/{id}")
     public ResponseEntity<DatosRespuestaUsuario> userById(@PathVariable Long id) {
+        //validar que el usuario exista y este activo
         return usuarioRepository.findById(id)
                 .map(usuario -> ResponseEntity.ok(new DatosRespuestaUsuario(usuario.getId(),
                         usuario.getNombre(), usuario.getCorreoElectronico(), usuario.getRoles())))
@@ -86,6 +83,7 @@ public class UsuarioController {
                                                             @RequestBody @Valid DatosModificarUsuario datos) {
         Usuario usuario = usuarioRepository.findById(id)
                 .orElseThrow(()-> new RuntimeException("Usuario no encontrado"));
+        //validar que el usuario este activo y existe
         String pass = null;
         Rol rol = null;
         if(datos.clave() != null){
@@ -103,6 +101,7 @@ public class UsuarioController {
     @DeleteMapping("/{id}")
     @Transactional
     public ResponseEntity<Void> deleteUser(@PathVariable Long id) {
+        //validar que el usuario exista y este activo
         Usuario usuario = usuarioRepository.findById(id)
                 .orElseThrow(()-> new RuntimeException("Usuario no encontrado"));
         usuario.desactivarUsuario();
