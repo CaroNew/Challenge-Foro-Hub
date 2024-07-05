@@ -1,4 +1,4 @@
-package com.challenge.forohub.controller;
+package com.challenge.forohub.domain.dto;
 
 import com.challenge.forohub.domain.model.roles.Rol;
 import java.util.List;

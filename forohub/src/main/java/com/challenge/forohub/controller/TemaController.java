@@ -42,7 +42,7 @@ public class TemaController {
 
     @GetMapping
     public ResponseEntity<Page<DatosRespuestaTema>> list(@PageableDefault(size = 5) Pageable page) {
-        //actulizar tema de paginacion 
+        //actulizar tema de paginacion
         return ResponseEntity.ok(temaRepository.findByActivoTrue(page).map(tema -> new DatosRespuestaTema(tema.getId(), tema.getTitulo(),
                 tema.getMensaje(), tema.getFecha(), tema.getStatus(), tema.getCursoId().getNombre(), tema.getAutorId().getNombre())));
     }
