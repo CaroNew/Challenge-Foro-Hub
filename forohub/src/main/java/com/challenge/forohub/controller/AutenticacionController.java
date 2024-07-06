@@ -48,6 +48,13 @@ public class AutenticacionController {
     public ResponseEntity <DatosRespuestaRegistroUsuario> registroUsuario(@RequestBody DatosRegistroUsuario datosUsuario,
                                                                           UriComponentsBuilder uriBuilder) {//pedir y devolver un dto
 
+        //Idea admin
+        /*
+        * if(nombre == admin && clave == admin )
+        *
+        * */
+
+
         var passwordEncriptada = passwordEncoder.encode(datosUsuario.clave());
         Rol rol = rolRepository.findByNombre("USER");
         Usuario usuario = usuarioRepository.save(new Usuario(datosUsuario, passwordEncriptada, rol));

@@ -2,6 +2,7 @@ package com.challenge.forohub.controller;
 
 import com.challenge.forohub.domain.dto.DatosModificarUsuario;
 import com.challenge.forohub.domain.dto.DatosCrearUsuario;
+import com.challenge.forohub.domain.dto.DatosRespuestaUsuario;
 import com.challenge.forohub.domain.model.roles.Rol;
 import com.challenge.forohub.domain.model.usuario.Usuario;
 import com.challenge.forohub.domain.repository.RolRepository;
