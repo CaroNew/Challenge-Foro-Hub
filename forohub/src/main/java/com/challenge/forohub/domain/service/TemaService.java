@@ -10,6 +10,8 @@ import com.challenge.forohub.domain.repository.CursoRepository;
 import com.challenge.forohub.domain.repository.TemaRepository;
 import com.challenge.forohub.domain.repository.UsuarioRepository;
 import com.challenge.forohub.infra.errores.ValidacionDeIntegridad;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -48,6 +50,14 @@ public class TemaService {
         Tema temaGuardado = temaRepository.save(new Tema(curso.get(), usuario.get(), datos));
 
         return new DatosRespuestaTema(temaGuardado);
+    }
+
+    public Page<DatosRespuestaTema> listarTemas(Pageable page){
+        Page<Tema> temas = temaRepository.findByActivoTrue(page);
+        if(temas.isEmpty())
+            throw new ValidacionDeIntegridad("No hay temas que mostrar");
+
+        return temas.map(DatosRespuestaTema::new);
     }
 
     public DatosRespuestaTema getById(Long id){

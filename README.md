@@ -95,4 +95,11 @@ En el cuerpo:
 
 ## Decisiones de diseño
 
-- Cuando un usuario se registra, se crea por defecto un usuario con rol USER, este usuario solo tiene permiso de crear, ver todos y modificar los temas/respuestas   
+- Cuando un usuario se registra, se crea por defecto un usuario con rol USER, este usuario solo tiene permiso de crear, ver todos y modificar los temas/respuestas  
+
+- Cuando se realiza el delete de los temas/usuarios/respuestas se hace un borrado logico, actualizando el campo activo de la tabla correspondiente.
+
+
+## En construccion...
+
+Los endpoints usuarios/respuestas ya son funcionales pero todavia estan en contrucción. 

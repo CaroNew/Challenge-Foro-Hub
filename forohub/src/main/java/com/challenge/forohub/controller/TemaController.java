@@ -3,7 +3,6 @@ package com.challenge.forohub.controller;
 import com.challenge.forohub.domain.dto.DatosRegistroTema;
 import com.challenge.forohub.domain.dto.DatosRespuestaTema;
 import com.challenge.forohub.domain.dto.DatosActualizarTema;
-import com.challenge.forohub.domain.repository.TemaRepository;
 import com.challenge.forohub.domain.service.TemaService;
 import jakarta.validation.Valid;
 import org.springframework.data.domain.Page;
@@ -22,11 +21,7 @@ public class TemaController {
     final
     TemaService temaService;
 
-    final
-    TemaRepository temaRepository;
-
-    public TemaController(TemaRepository temaRepository, TemaService temaService) {
-        this.temaRepository = temaRepository;
+    public TemaController(TemaService temaService) {
         this.temaService = temaService;
     }
 
@@ -42,9 +37,7 @@ public class TemaController {
 
     @GetMapping
     public ResponseEntity<Page<DatosRespuestaTema>> list(@PageableDefault(size = 5) Pageable page) {
-        //actulizar tema de paginacion
-        return ResponseEntity.ok(temaRepository.findByActivoTrue(page).map(tema -> new DatosRespuestaTema(tema.getId(), tema.getTitulo(),
-                tema.getMensaje(), tema.getFecha(), tema.getStatus(), tema.getCursoId().getNombre(), tema.getAutorId().getNombre())));
+        return ResponseEntity.ok(temaService.listarTemas(page));
     }
 
     @GetMapping("/{id}")
