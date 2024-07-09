@@ -4,6 +4,8 @@ import com.challenge.forohub.domain.dto.DatosRegistroTema;
 import com.challenge.forohub.domain.dto.DatosRespuestaTema;
 import com.challenge.forohub.domain.dto.DatosActualizarTema;
 import com.challenge.forohub.domain.service.TemaService;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import jakarta.validation.Valid;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -16,6 +18,7 @@ import java.net.URI;
 
 @RestController
 @RequestMapping("api/temas")
+@SecurityRequirement(name = "bearer-key")
 public class TemaController {
 
     final

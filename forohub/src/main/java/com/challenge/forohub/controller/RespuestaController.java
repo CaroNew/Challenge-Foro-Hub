@@ -1,7 +1,6 @@
 package com.challenge.forohub.controller;
 
 import com.challenge.forohub.domain.dto.DatosCrearRespuesta;
-import com.challenge.forohub.domain.dto.DatosListaRespuestaPorTema;
 import com.challenge.forohub.domain.dto.DatosRespuesta;
 import com.challenge.forohub.domain.model.respuesta.Respuesta;
 import com.challenge.forohub.domain.model.tema.Tema;
@@ -9,6 +8,7 @@ import com.challenge.forohub.domain.model.usuario.Usuario;
 import com.challenge.forohub.domain.repository.RespuestaRepository;
 import com.challenge.forohub.domain.repository.TemaRepository;
 import com.challenge.forohub.domain.repository.UsuarioRepository;
+import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -16,10 +16,10 @@ import org.springframework.web.util.UriComponentsBuilder;
 
 import java.net.URI;
 import java.time.LocalDateTime;
-import java.util.List;
 
 @RestController
 @RequestMapping("api/respuestas")
+@SecurityRequirement(name = "bearer-key")
 public class RespuestaController {
 
     private final

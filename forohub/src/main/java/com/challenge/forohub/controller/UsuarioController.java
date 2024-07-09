@@ -7,6 +7,8 @@ import com.challenge.forohub.domain.model.roles.Rol;
 import com.challenge.forohub.domain.model.usuario.Usuario;
 import com.challenge.forohub.domain.repository.RolRepository;
 import com.challenge.forohub.domain.repository.UsuarioRepository;
+import com.challenge.forohub.domain.service.UsuarioService;
+import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Pageable;
@@ -23,7 +25,11 @@ import java.util.List;
 
 @RestController
 @RequestMapping("api/usuarios")
+@SecurityRequirement(name = "bearer-key")
 public class UsuarioController {
+
+    @Autowired
+    UsuarioService usuarioService;
 
     private final
     UsuarioRepository usuarioRepository;
@@ -43,19 +49,8 @@ public class UsuarioController {
     public ResponseEntity<DatosRespuestaUsuario> create(@RequestBody @Valid DatosCrearUsuario datos,
                                                                 UriComponentsBuilder uriBuilder) {
 
-        var passEncod = passwordEncoder.encode(datos.clave());
-        Rol rol = rolRepository.findByNombre(datos.rol());
-
-        datos = new DatosCrearUsuario(datos.nombre(), datos.CorreoElectronico(), passEncod, datos.rol());
-
-        Usuario usuario = usuarioRepository.save(new Usuario(null, datos.nombre(), datos.CorreoElectronico(),
-                datos.clave(), List.of(rol), true));
-
-        DatosRespuestaUsuario respuesta = new DatosRespuestaUsuario(usuario.getId(), usuario.getNombre(),
-                usuario.getCorreoElectronico(), usuario.getRoles());
-
-        URI url = uriBuilder.path("/api/usuarios/{id}").buildAndExpand(usuario.getId()).toUri();
-
+        DatosRespuestaUsuario respuesta = usuarioService.crearUsuario(datos);
+        URI url = uriBuilder.path("/api/usuarios/{id}").buildAndExpand(respuesta.id()).toUri();
         return ResponseEntity.created(url).body(respuesta);
     }
 

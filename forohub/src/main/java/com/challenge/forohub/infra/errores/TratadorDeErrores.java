@@ -23,7 +23,8 @@ public class TratadorDeErrores {
 
     @ExceptionHandler(DataIntegrityViolationException.class)
     public ResponseEntity<?> validadorDeIntegridadHandler(DataIntegrityViolationException e){
-        return ResponseEntity.badRequest().body(e.getMessage());
+        var causa = e.getMessage();
+        return ResponseEntity.badRequest().body(causa);
     }
 
     @ExceptionHandler(NoSuchElementException.class)
