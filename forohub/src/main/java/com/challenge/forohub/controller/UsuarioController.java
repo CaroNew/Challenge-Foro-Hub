@@ -8,6 +8,7 @@ import com.challenge.forohub.domain.model.usuario.Usuario;
 import com.challenge.forohub.domain.repository.RolRepository;
 import com.challenge.forohub.domain.repository.UsuarioRepository;
 import com.challenge.forohub.domain.service.UsuarioService;
+import io.swagger.v3.oas.annotations.Hidden;
 import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,11 +22,11 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.util.UriComponentsBuilder;
 
 import java.net.URI;
-import java.util.List;
 
+@Hidden
 @RestController
 @RequestMapping("api/usuarios")
-@SecurityRequirement(name = "bearer-key")
+//@SecurityRequirement(name = "bearer-key") swagger config
 public class UsuarioController {
 
     @Autowired

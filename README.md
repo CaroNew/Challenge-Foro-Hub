@@ -63,35 +63,135 @@ Modificar el archivo: [application.properties](./literalura/src/main/resources/a
 
 ## Funcionalidad
 
-Crear un usuario con permiso USER:
+**Registro (con permiso USER por defecto)**
+
+- Ruta:
 
 ```
-/api/auth/registro 
+POST: /api/auth/registro 
 ```
-Parametros para enviar en el cuerpo:
+
+- Parametros para enviar en el cuerpo del json:
 
 ```
 {
     "nombre":"John Doe",
-    "email":"testmail@gmail.com",
+    "email":"testmail@mail.com",
     "clave":"password1234"
 }	
 
 ```
 
-Loguearse:
+**Autenticarse**
+
+- Ruta:
 
 ```
-/auth/login
+POST: /auth/login
 
 ```
-En el cuerpo:
+- En el cuerpo:
+
 ```
 {
     "email":"testmail@gmail.com",
     "clave":"password1234"
 }
 ```
+---
+
+**Crear un tema**
+
+- Ruta:
+
+```
+POST: /api/temas
+```
+
+- Cuerpo:
+
+```
+{
+    "titulo":"Ayuda!!!! Creo que tengo un problema...",
+    "mensaje":"He hecho un delete pero ya no me aparecen los datos :'(",
+    "usuario_id": "1",
+    "nombre_curso":"Bases de Datos Avanzadas"
+}
+```
+
+**Obtener todos los temas**
+
+
+- Ruta:
+
+```
+GET: /api/temas
+```
+
+- Cuerpo:
+
+```
+{ 
+}
+```
+**Obtener un tema por id**
+- Ruta:
+
+```
+GET: /api/temas/{id}
+```
+
+- Cuerpo:
+
+```
+{   
+}
+```
+**Actualizar un tema**
+- Ruta:
+
+```
+UPDATE: /api/temas/{id}
+```
+
+- Cuerpo:
+
+```
+{
+    "id": 0,
+    "titulo": "string",
+    "mensaje": "string",
+    "status": "ABIERTO/CERRADO"
+}
+```
+
+**Borrar un tema (borrado lógico)**
+
+- Ruta:
+
+```
+DELETE: /api/temas/{id}
+```
+
+- Cuerpo:
+
+```
+{   
+}
+```
+
+---
+
+
+## Swagger disponible!
+
+Para probar esta api con Swagger docs, solo tienes que correr el proyecto y colocar en tu navegador favorito la siguiente ruta: http://server:port/context-path/v3/api-docs, donde:
+- server = el nombre del servidor o ip
+- port = el puerto del servidor
+- context-path = la ruta de la aplicacion.
+
+Probablemente es [esta](http://localhost:8080/swagger-ui/index.html#/tema-controller/update), ¿adiviné?. No olvides resgistrarte y autenticarte antes de probar los endpoints.
+
 
 ## Decisiones de diseño
 
@@ -102,4 +202,4 @@ En el cuerpo:
 
 ## En construccion...
 
-Los endpoints usuarios/respuestas ya son funcionales pero todavia estan en contrucción. 
+Los endpoints usuarios/respuestas ya son funcionales pero todavia estan en construcción. 

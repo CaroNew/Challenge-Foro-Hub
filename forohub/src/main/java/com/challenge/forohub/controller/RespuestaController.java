@@ -8,6 +8,7 @@ import com.challenge.forohub.domain.model.usuario.Usuario;
 import com.challenge.forohub.domain.repository.RespuestaRepository;
 import com.challenge.forohub.domain.repository.TemaRepository;
 import com.challenge.forohub.domain.repository.UsuarioRepository;
+import io.swagger.v3.oas.annotations.Hidden;
 import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -17,9 +18,11 @@ import org.springframework.web.util.UriComponentsBuilder;
 import java.net.URI;
 import java.time.LocalDateTime;
 
+@Hidden
 @RestController
 @RequestMapping("api/respuestas")
-@SecurityRequirement(name = "bearer-key")
+
+//@SecurityRequirement(name = "bearer-key")
 public class RespuestaController {
 
     private final
